@@ -9,7 +9,13 @@ class PagesController extends Controller
     public function home ()
     {
         return view('welcome', [
-                'foo' => 'Page'
+                'foo' => 'Page',
+                'tasks'=> [
+                    'Go to the market',
+                    'Cook good food',
+                    'Watch a movie',
+                    'Sleeeeep!'
+                ]
             ]);
     }
 
