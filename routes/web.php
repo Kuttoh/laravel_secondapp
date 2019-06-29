@@ -12,7 +12,14 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome', [
+        'foo' => 'Page',
+        'tasks' => [
+            'Go to the market',
+            'Cook supper',
+            'Clean the house'
+        ]
+    ]);
 });
 
 Route::get('/contact', function () {
