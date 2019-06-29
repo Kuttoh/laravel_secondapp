@@ -11,21 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome', [
-        'foo' => 'Page',
-        'tasks' => [
-            'Go to the market',
-            'Cook supper',
-            'Clean the house'
-        ]
-    ]);
-});
+Route::get('/', 'PagesController@home');
+Route::get('/contact', 'PagesController@contact');
+Route::get('/about', 'PagesController@about');
 
-Route::get('/contact', function () {
-    return view('contact');
-});
-
-Route::get('/about', function () {
-    return view('about');
-});
