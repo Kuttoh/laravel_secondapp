@@ -34,4 +34,16 @@ class PagesController extends Controller
     {
         return view('about');
     }
+
+    public function media()
+    {
+        return view('media');
+    }
+
+    public function foundation()
+    {
+        return view('foundation', [
+            'some' => 'Page'
+        ]);
+    }
 }
