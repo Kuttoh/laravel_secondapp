@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Project;
 
 class PagesController extends Controller
 {
@@ -45,5 +46,12 @@ class PagesController extends Controller
         return view('foundation', [
             'some' => 'Page'
         ]);
+    }
+
+    public function projects()
+    {
+        $projects = Project::all();
+
+        return view('projects', compact('projects'));
     }
 }
