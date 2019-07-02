@@ -13,4 +13,4 @@
         tablet with a stylus on the market right now.
     </p>
 
-@endsection
+    @endsection

@@ -12,4 +12,4 @@
 
     @endforeach
 
-@endsection
+    @endsection

@@ -10,10 +10,11 @@
 
         <li>{{$project->title}}</li>
 
-        <p>{{$project->description}}</p>
-
+{{--        <p>{{$project->description}}</p>--}}
 
     @endforeach
+
+    <a href="/projects/create">Create New</a>
 
     @endsection
 
