@@ -5,9 +5,8 @@
 @section('content')
 
     <h1 class="title">Edit Project</h1>
-    <form method="POST" action="/projects/{{$project->id}}">
-        {{method_field('PATCH')}}
-        {{csrf_field()}}
+    <form method="POST" action="/projects/{{$project->id}}/update" style="margin-bottom: 1em">
+        @csrf
 
         <div class="field">
             <label class="label" for="title">Project Title</label>
@@ -30,6 +29,5 @@
         </div>
 
     </form>
-
 
     @endsection

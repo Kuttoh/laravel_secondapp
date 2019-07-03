@@ -6,23 +6,29 @@
 
     <h1>Create a New Project</h1>
 
-    <form method="post" action="/projects">
+    <form method="POST" action="/projects/store">
         {{csrf_field()}}
-        
-        <div>
-            <label for="inp">Project Title</label> <br>
-            <input type="text" placeholder="project title" id="inp" name="title">
-        </div>
-        
-        <div>
-            <label for="desc">Project Description</label> <br>
-            <textarea name="description" id="" cols="30" rows="10" id="desc" placeholder="project description max 200words"></textarea>
+
+        <div class="field">
+            <label class="label" for="title">Project Title</label>
+            <div class="control">
+                <input name="title" class="input" id="title" placeholder="e.g Project Finance">
+            </div>
         </div>
 
-        <div>
-            <button type="submit">Create Project</button>
+        <div class="field">
+            <label class="label" for="description">Project Description</label>
+            <div class="control">
+                <textarea class="textarea" name="description" id="description" placeholder="some long desc"></textarea>
+            </div>
         </div>
-        
+
+        <div class="field">
+            <div class="control">
+                <button type="submit" class="button is-link">Create Project</button>
+            </div>
+        </div>
+
     </form>
 
     @endsection

@@ -38,11 +38,4 @@ class PagesController extends Controller
             'some' => 'Page'
         ]);
     }
-
-
-    public function store()
-    {
-
-
-    }
 }

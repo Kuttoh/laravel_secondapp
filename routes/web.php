@@ -20,12 +20,12 @@ Route::get('/foundation', 'PagesController@foundation');
 ///*
 // * Projects Routing
 // */
-//Route::get('/projects', 'PagesController@projects');
-//Route::get('/projects/create', 'PagesController@create'); ##display create form
-//Route::get('/projects/{project}', 'PagesController@show'); ##display the project
-//Route::post('/projects', 'PagesController@store'); ##create project
-//Route::get('/projects/{project}/edit', 'PagesController@edit'); ##display edit form
-//Route::patch('/projects/{project}', 'PagesController@update'); ##update the project
-//Route::delete('/projects/{project}', 'PagesController@destroy'); ##delete the project
+Route::get('/projects', 'ProjectsController@index');
+Route::get('/projects/create', 'ProjectsController@create'); ##display create form
+Route::get('/projects/{project}/details', 'ProjectsController@details'); ##display the project
+Route::post('/projects/store', 'ProjectsController@store'); ##create project
+Route::get('/projects/{project}/edit', 'ProjectsController@edit'); ##display edit form
+Route::post('/projects/{project}/update', 'ProjectsController@update'); ##update the project
+Route::get('/projects/{id}', 'ProjectsController@destroy'); ##delete the project
 
-Route::resource('projects', 'ProjectsController');
+//Route::resource('projects', 'ProjectsController');

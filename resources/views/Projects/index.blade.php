@@ -4,18 +4,22 @@
 
 @section('content')
 
-    <h1>Here are our projects</h1>
+    <h1 class="title" >Here are our projects</h1>
 
-    @foreach($projects as $project)
+    <ol style="margin-bottom: 1em">
+        @foreach($projects as $project)
 
-        <li>{{$project->title}}</li>
+            <li>{{$project->title}} |
+                <a href="/projects/{{$project->id}}/edit">Edit</a> |
+                <a href="/projects/{{$project->id}}">Delete</a> |
+                <a href="/projects/{{$project->id}}/details">View</a>
+            </li>
 
-{{--        <p>{{$project->description}}</p>--}}
+        @endforeach
+    </ol>
 
-    @endforeach
+    <a href="/projects/create"><button type="submit" class="button is-link">Create New</button></a>
 
-    <a href="/projects/create">Create New</a>
-
-    @endsection
+@endsection
 
 
