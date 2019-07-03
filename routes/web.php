@@ -28,5 +28,4 @@ Route::get('/foundation', 'PagesController@foundation');
 //Route::patch('/projects/{project}', 'PagesController@update'); ##update the project
 //Route::delete('/projects/{project}', 'PagesController@destroy'); ##delete the project
 
-Route::resource('projects', 'ProjectController');
-
+Route::resource('projects', 'ProjectsController');

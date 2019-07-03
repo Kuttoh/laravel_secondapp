@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Project;
+use App\Projects;
 
-class ProjectController extends Controller
+class ProjectsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $projects = Project::all();
+        $projects = Projects::all();
 
-        return view('Projects.projects', compact('projects'));
+        return view('Projects.index', compact('projects'));
     }
 
     /**
@@ -37,7 +37,7 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $project = new Project();
+        $project = new Projects();
 
         $project->title = request('title');
         $project->description = request('description');

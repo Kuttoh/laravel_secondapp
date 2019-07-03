@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Offices;
 use Illuminate\Http\Request;
-use App\Project;
+use App\Projects;
+use App\Contacts;
 
 class PagesController extends Controller
 {
@@ -11,24 +13,13 @@ class PagesController extends Controller
     {
         return view('welcome', [
                 'foo' => 'Page',
-                'tasks'=> [
-                    'Go to the market',
-                    'Cook good food',
-                    'Watch a movie',
-                    'Sleeeeep!'
-                ]
             ]);
     }
 
     public function contact()
     {
-        return view('contact', [
-            'offices' => [
-                'CBD Office',
-                'Liaison Office',
-                'Chancery Office',
-                'Westlands Office'
-            ]]);
+        $offices= Offices::all();
+        return view('contact', compact('offices'));
     }
 
     public function about()

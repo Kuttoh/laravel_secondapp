@@ -1,15 +1,15 @@
 @extends('layout')
 
-@section('title', 'Contact Us')
+@section('title', 'Our Offices')
 
 @section('content')
 
-    <h1>Contact Us</h1>
+    <h1>Our Office Locations</h1>
 
     @foreach($offices as $office)
 
-        <li>{{$office}}</li>
+    <li>{{$office->name}}</li>
 
-    @endforeach
+        @endforeach
 
     @endsection
