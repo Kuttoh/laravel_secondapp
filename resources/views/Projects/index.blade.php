@@ -11,7 +11,7 @@
 
             <li>{{$project->title}} |
                 <a href="/projects/{{$project->id}}/edit">Edit</a> |
-                <a href="/projects/{{$project->id}}">Delete</a> |
+                <a href="/projects/{{$project->id}}/delete">Delete</a> |
                 <a href="/projects/{{$project->id}}/details">View</a>
             </li>
 

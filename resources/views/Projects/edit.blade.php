@@ -4,6 +4,22 @@
 
 @section('content')
 
+    @if ($errors->any())
+
+        <div class="notification is-danger">
+            <ul>
+
+                @foreach($errors->all() as $error)
+
+                    <li>{{$error}}</li>
+
+                @endforeach
+
+            </ul>
+        </div>
+
+    @endif
+
     <h1 class="title">Edit Project</h1>
     <form method="POST" action="/projects/{{$project->id}}/update" style="margin-bottom: 1em">
         @csrf
@@ -11,14 +27,14 @@
         <div class="field">
             <label class="label" for="title">Project Title</label>
             <div class="control">
-                <input name="title" class="input" id="title" placeholder="e.g Project Finance" value="{{$project->title}}">
+                <input name="title" class="input" id="title" placeholder="e.g Project Finance" value="{{$project->title}}" required>
             </div>
         </div>
 
         <div class="field">
             <label class="label" for="description">Project Description</label>
             <div class="control">
-                <textarea class="textarea" name="description" id="description" placeholder="some long desc">{{$project->description}}</textarea>
+                <textarea class="textarea" name="description" id="description" placeholder="some long desc" required>{{$project->description}}</textarea>
             </div>
         </div>
 

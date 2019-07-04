@@ -37,6 +37,11 @@ class ProjectsController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title'=> ['required', 'min:3'],
+            'description' => ['required', 'min:6', 'max:200']
+        ]);
+
         Projects::create($request->all());
 
         return redirect('/projects');
@@ -48,10 +53,8 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function details($id)
+    public function details(Projects $project)
     {
-        $project = Projects::find($id);
-
         return view('Projects.details', compact('project'));
     }
 
@@ -61,10 +64,8 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Projects $project)
     {
-        $project = Projects::find($id);
-
         return view('Projects.edit', compact('project'));
 
     }
@@ -79,7 +80,12 @@ class ProjectsController extends Controller
     public function update(Request $request, $id)
     {
 
-        Projects::find($id)->update($request->all());
+        $request->validate([
+            'title'=> ['required', 'min:3'],
+            'description' => ['required', 'min:6', 'max:200']
+        ]);
+
+        Projects::findOrFail($id)->update($request->all());
 
 
         return redirect('projects');
@@ -95,7 +101,7 @@ class ProjectsController extends Controller
     public function destroy($id)
     {
 
-        Projects::find($id)->delete();
+        Projects::findOrFail($id)->delete();
 
         return redirect('/projects');
     }

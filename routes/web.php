@@ -26,6 +26,6 @@ Route::get('/projects/{project}/details', 'ProjectsController@details'); ##displ
 Route::post('/projects/store', 'ProjectsController@store'); ##create project
 Route::get('/projects/{project}/edit', 'ProjectsController@edit'); ##display edit form
 Route::post('/projects/{project}/update', 'ProjectsController@update'); ##update the project
-Route::get('/projects/{id}', 'ProjectsController@destroy'); ##delete the project
+Route::get('/projects/{id}/delete', 'ProjectsController@destroy'); ##delete the project
 
 //Route::resource('projects', 'ProjectsController');
