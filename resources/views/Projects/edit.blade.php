@@ -27,14 +27,14 @@
         <div class="field">
             <label class="label" for="title">Project Title</label>
             <div class="control">
-                <input name="title" class="input" id="title" placeholder="e.g Project Finance" value="{{$project->title}}" required>
+                <input name="title" class="input" id="title" placeholder="e.g Project Finance" value="{{$project->title}}">
             </div>
         </div>
 
         <div class="field">
             <label class="label" for="description">Project Description</label>
             <div class="control">
-                <textarea class="textarea" name="description" id="description" placeholder="some long desc" required>{{$project->description}}</textarea>
+                <textarea class="textarea" name="description" id="description" placeholder="some long desc">{{$project->description}}</textarea>
             </div>
         </div>
 

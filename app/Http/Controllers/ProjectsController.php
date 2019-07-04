@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProject;
 use Illuminate\Http\Request;
 use App\Projects;
 
@@ -35,16 +36,10 @@ class ProjectsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreProject $request)
     {
-        $request->validate([
-            'title'=> ['required', 'min:3'],
-            'description' => ['required', 'min:6', 'max:200']
-        ]);
 
         Projects::create($request->all());
-
-
 
         return redirect('/projects');
     }
@@ -79,13 +74,8 @@ class ProjectsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreProject $request, $id)
     {
-
-        $request->validate([
-            'title'=> ['required', 'min:3'],
-            'description' => ['required', 'min:6', 'max:200']
-        ]);
 
         Projects::findOrFail($id)->update($request->all());
 
