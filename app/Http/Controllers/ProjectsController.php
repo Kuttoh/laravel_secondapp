@@ -44,6 +44,8 @@ class ProjectsController extends Controller
 
         Projects::create($request->all());
 
+
+
         return redirect('/projects');
     }
 
