@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProject;
+use App\Mail\ProjectCreated;
 use Illuminate\Http\Request;
 use App\Projects;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
 {
@@ -39,7 +41,12 @@ class ProjectsController extends Controller
     public function store(StoreProject $request)
     {
 
-        Projects::create($request->all());
+        $project = Projects::create($request->all());
+
+
+        Mail::to('kuttohisaac@gmail.com')->queue(
+            new ProjectCreated($project)
+        );
 
         return redirect('/projects');
     }

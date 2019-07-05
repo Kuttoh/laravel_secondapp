@@ -10,9 +10,9 @@
         @foreach($projects as $project)
 
             <li>{{$project->title}} |
+                <a href="/projects/{{$project->id}}/details" style="color: #2a9055">View</a> |
                 <a href="/projects/{{$project->id}}/edit">Edit</a> |
-                <a href="/projects/{{$project->id}}/delete">Delete</a> |
-                <a href="/projects/{{$project->id}}/details">View</a>
+                <a href="/projects/{{$project->id}}/delete" style="color: red;">Delete</a>
             </li>
 
         @endforeach
