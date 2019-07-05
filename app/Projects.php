@@ -9,4 +9,9 @@ class Projects extends Model
     protected $table="projects";
 
     protected $guarded=['id'];
+
+    public function task()
+    {
+       return $this->hasMany(Task::class);
+    }
 }
