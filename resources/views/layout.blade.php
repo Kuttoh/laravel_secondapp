@@ -15,9 +15,12 @@
 
 <body>
 
-    <a href="/">Home</a> | <a href="/projects">Projects</a>
-{{--    | <a href="/contact">Our Offices</a> | <a href="/about">About Us</a> |--}}
-{{--    <a href="/media">Media</a> | <a href="/foundation">Foundation</a> */--}}
+{{--    <a href="/">Home</a> |--}}
+    <a href="/projects">Projects</a>
+{{--    <a href="/contact">Our Offices</a> |--}}
+{{--    <a href="/about">About Us</a> |--}}
+{{--    <a href="/media">Media</a> |--}}
+{{--    <a href="/foundation">Foundation</a>--}}
     <div class="container">
         @yield('content')
     </div>

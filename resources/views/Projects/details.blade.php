@@ -10,19 +10,19 @@
         {{$project->description}}
     </p>
 
-    @if($project->task->count())
+{{--    @if($project->task->count())--}}
 
-        <div>
+{{--        <div>--}}
 
-            @foreach($project->task as $task)
+{{--            @foreach($project->task as $task)--}}
 
-                <li>{{$task->description}}</li>
+{{--                <li>{{$task->description}}</li>--}}
 
-            @endforeach
+{{--            @endforeach--}}
 
-        </div>
+{{--        </div>--}}
 
-    @endif
+{{--    @endif--}}
 
     <a href="/projects/{{$project->id}}/edit">Edit</a> | <a href="/projects/{{$project->id}}/delete" style="color: red;">Delete</a>
 

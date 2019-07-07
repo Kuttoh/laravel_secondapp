@@ -29,3 +29,7 @@ Route::post('/projects/{project}/update', 'ProjectsController@update'); ##update
 Route::get('/projects/{id}/delete', 'ProjectsController@destroy'); ##delete the project
 
 //Route::resource('projects', 'ProjectsController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

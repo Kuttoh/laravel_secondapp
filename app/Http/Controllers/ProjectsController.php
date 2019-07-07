@@ -12,10 +12,16 @@ use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->only('store');
+    }
 
     public function index()
     {
-        $projects = Projects::all();
+
+
+        $projects = Projects::where('user_id', auth()->id())->get();
 
         return view('Projects.index', compact('projects'));
     }
@@ -30,8 +36,10 @@ class ProjectsController extends Controller
     public function store(StoreProject $request)
     {
 
-        $project = Projects::create($request->all());
+        $input = $request->all();
+        $input['user_id'] = auth()->id();
 
+        $project = Projects::create($input);
 
         Mail::to('kuttohisaac@gmail.com')->queue(
             new ProjectCreated($project)
@@ -61,9 +69,9 @@ class ProjectsController extends Controller
 
         $project->update($request->all());
 
-        Mail::to('kuttohisaac@gmail.com')->queue(
-            new ProjectEdited($project)
-        );
+//        Mail::to('kuttohisaac@gmail.com')->queue(
+//            new ProjectEdited($project)
+//        );
 
         return redirect('projects');
 
@@ -75,9 +83,9 @@ class ProjectsController extends Controller
 
         $project = Projects::findOrFail($id);
 
-        Mail::to('kuttohisaac@gmail.com')->queue(
-            new ProjectDeleted($project)
-        );
+//        Mail::to('kuttohisaac@gmail.com')->queue(
+//            new ProjectDeleted($project)
+//        );
 
         $project->delete();
 

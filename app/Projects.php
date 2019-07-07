@@ -10,7 +10,7 @@ class Projects extends Model
 
     protected $guarded=['id'];
 
-    public function task()
+    public function tasks()
     {
        return $this->hasMany(Task::class);
     }
