@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Mail\UserLoggedIn;
 use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Registered as RegisteredAlias;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\Mail;
