@@ -14,14 +14,15 @@ class ProjectsController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth')->only('store');
+        $this->middleware('auth')->only('store','update','destroy');
     }
 
     public function index()
     {
 
 
-        $projects = Projects::where('user_id', auth()->id())->get();
+//        $projects = Projects::where('user_id', auth()->id())->get();
+        $projects = Projects::all();
 
         return view('Projects.index', compact('projects'));
     }
