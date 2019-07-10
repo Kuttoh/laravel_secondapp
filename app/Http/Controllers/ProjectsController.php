@@ -8,6 +8,8 @@ use App\Mail\ProjectDeleted;
 use App\Mail\ProjectEdited;
 use Illuminate\Http\Request;
 use App\Projects;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectsController extends Controller
@@ -22,7 +24,22 @@ class ProjectsController extends Controller
 
 
 //        $projects = Projects::where('user_id', auth()->id())->get();
-        $projects = Projects::all();
+//        $projects = Projects::all();
+//
+//        Cache::add('projects' , $projects);
+
+        if(Cache::has('projects'))
+        {
+            Log::info('from Cache');
+               $projects =  Cache::get('projects');
+        }
+        else
+        {
+            Log::info('from DB');
+            $projects = Projects::all();
+            Cache::add('projects' , $projects, 60);
+        }
+
 
         return view('Projects.index', compact('projects'));
     }
