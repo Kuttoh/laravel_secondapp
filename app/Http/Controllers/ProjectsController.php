@@ -30,13 +30,13 @@ class ProjectsController extends Controller
 
         if(Cache::has('projects'))
         {
-            Log::info('from Cache');
+//            Log::info('from Cache');
                $projects =  Cache::get('projects');
         }
         else
         {
-            Log::info('from DB');
-            $projects = Projects::all();
+//            Log::info('from DB');
+            $projects = Projects::all(); //Global scope has been applied here
             Cache::add('projects' , $projects, 60);
         }
 
