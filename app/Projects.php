@@ -31,4 +31,9 @@ class Projects extends Model
     {
         $this->attributes['description'] = strtolower($value);
     }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = strtoupper($value);
+    }
 }
