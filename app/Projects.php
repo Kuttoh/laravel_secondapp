@@ -15,14 +15,14 @@ class Projects extends Model
        return $this->hasMany(Task::class);
     }
 
-    protected static function boot()
-    {
-        parent::boot();
-
-        static::addGlobalScope('user_id', function ($builder) {
-            $builder->where('user_id', '=', 1)
-                    ->orderBy('title', 'asc');
-//                    ->where('id', '<', 10)
-        });
-    }
+//    protected static function boot()
+//    {
+//        parent::boot();
+//
+//        static::addGlobalScope('user_id', function ($builder) {
+//            $builder->where('user_id', '=', 1)
+//                    ->orderBy('title', 'asc');
+////                    ->where('id', '<', 10)
+//        });
+//    }
 }

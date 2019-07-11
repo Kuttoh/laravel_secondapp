@@ -11,6 +11,7 @@ use App\Projects;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Repositories\ProjectRepository;
 
 class ProjectsController extends Controller
 {
@@ -19,7 +20,7 @@ class ProjectsController extends Controller
         $this->middleware('auth')->only('store', 'update','destroy');
     }
 
-    public function index()
+    public function index(ProjectRepository $projectRepository)
     {
 
 
@@ -36,7 +37,8 @@ class ProjectsController extends Controller
         else
         {
 //            Log::info('from DB');
-            $projects = Projects::all(); //Global scope has been applied here
+//            $projects = Projects::all(); //Global scope has been applied here
+            $projects = $projectRepository->adminProjects(); //Using repository to implement query scopes
             Cache::add('projects' , $projects, 60);
         }
 
