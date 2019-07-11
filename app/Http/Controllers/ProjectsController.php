@@ -6,6 +6,7 @@ use App\Http\Requests\StoreProject;
 use App\Mail\ProjectCreated;
 use App\Mail\ProjectDeleted;
 use App\Mail\ProjectEdited;
+use App\Queries\adminProjects;
 use Illuminate\Http\Request;
 use App\Projects;
 use Illuminate\Support\Facades\Cache;
@@ -38,7 +39,8 @@ class ProjectsController extends Controller
         {
 //            Log::info('from DB');
 //            $projects = Projects::all(); //Global scope has been applied here
-            $projects = $projectRepository->adminProjects(); //Using repository to implement query scopes
+//            $projects = $projectRepository->adminProjects(); //Using repository to implement query scopes
+            $projects = (new adminProjects())->get(); //Using query objects
             Cache::add('projects' , $projects, 60);
         }
 
