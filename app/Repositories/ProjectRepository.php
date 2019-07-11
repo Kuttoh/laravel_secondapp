@@ -8,7 +8,9 @@ class ProjectRepository
 {
     public function adminProjects()
     {
-        return Projects::where('id', '>=', '10')->get();
+        return Projects::where('user_id', '=', '1')
+            ->orderBy('title', 'asc')
+            ->get();
     }
 
 }
