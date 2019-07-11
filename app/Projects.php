@@ -25,4 +25,10 @@ class Projects extends Model
 ////                    ->where('id', '<', 10)
 //        });
 //    }
+
+    //Mutators
+    public function setDescriptionAttribute($value)
+    {
+        $this->attributes['description'] = strtolower($value);
+    }
 }
