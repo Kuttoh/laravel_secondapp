@@ -16,4 +16,16 @@ class ExampleTest extends TestCase
     {
         $this->assertTrue(true);
     }
+
+    public function testHomePageHasWelcome()
+    {
+        $this->get('/')
+            ->assertSee('Welcome');
+    }
+
+    public function testProjectsPageHasCreateNew()
+    {
+        $this->get('/projects')
+            ->assertSee('Create New');
+    }
 }

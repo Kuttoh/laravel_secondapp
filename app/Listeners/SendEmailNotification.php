@@ -32,7 +32,7 @@ class SendEmailNotification
         //get user's log-in and email
         $email = $event->user->email;
 
-        //send email notification to user about log-in -- I know it's not the best but well; we all gotta start from somewhere.
+        //send email notification to user about log-in -- I know it's not ideal but well; we all gotta start from somewhere.
         Mail::to($email)->queue(
             new UserLoggedIn()
         );

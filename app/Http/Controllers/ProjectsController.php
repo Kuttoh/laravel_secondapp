@@ -41,7 +41,7 @@ class ProjectsController extends Controller
 //            $projects = Projects::all(); //Global scope has been applied here
 //            $projects = $projectRepository->adminProjects(); //Using repository to implement query scopes
             $projects = (new adminProjects())->get(); //Using query objects
-            Cache::add('projects' , $projects, 60);
+            Cache::add('projects' , $projects, 0);
         }
 
 
