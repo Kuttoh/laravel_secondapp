@@ -3,9 +3,11 @@
 namespace Tests\Unit;
 
 
+use App\Mail\ProjectCreated;
 use App\Projects;
 use App\User;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
