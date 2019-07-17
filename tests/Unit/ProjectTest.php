@@ -3,34 +3,85 @@
 namespace Tests\Unit;
 
 
-use App\Mail\ProjectCreated;
 use App\Projects;
-use App\User;
+use App\Repositories\ProjectRepository;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
-use Illuminate\Support\Facades\Mail;
+use Tests\Base\UserBase;
 use Tests\TestCase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProjectTest extends TestCase
 {
     use DatabaseTransactions;
+    use UserBase;
+
+    protected $user;
+    protected $repo;
+
+    public function setUp(): void
+    {
+        parent::setUp();
+
+        $this->user = $this->getUser();
+
+        $this->repo = new ProjectRepository();
+    }
+
     /**
      * A basic unit test example.
      *
      * @return void
      */
-    public function testItCanCreateAProject()
+    public function testItCanGetAdminProjects()
     {
-        $testProject = factory(Projects::class, 1)->create(['user_id' => 1]);
+        $addedProjects = factory(Projects::class, 10)->create(['user_id' => $this->user->id]);
 
-        foreach ($testProject as $element)
-        {
-            $testCreated = $element->id;
+        $projects = $this->repo->orderedProjects();
+
+        $this->assertCount($addedProjects->count(), $projects);
+
+        foreach ($projects as $project) {
+            $this->assertEquals($this->user->id, $project->user_id);
         }
+    }
 
-        $latestProject = Projects::all()->last()->id;
+    public function testItCanSaveAProject()
+    {
+        $input = [
+            'user_id' => $this->user->id,
+            'title' => 'Test',
+            'description' => 'Kitu unique enye haiwezi kuwa kwa db',
+        ];
 
-        $this->assertEquals($testCreated, $latestProject);
+        $this->repo->save($input);
+
+        $this->assertDatabaseHas('projects', $input);
+    }
+
+    public function testItCanGetProjectById()
+    {
+        $newProject = factory(Projects::class, 1)->create(['user_id' => $this->user->id]);
+
+        $newProject = $newProject[0];
+
+        $project = $this->repo->getProjectById($newProject->id);
+
+        $this->assertEquals($newProject->id, $project->id);
+    }
+
+    public function testItCanUpdateProject()
+    {
+        $someProject = factory(Projects::class, 1)->create(['user_id' => $this->user->id]);
+
+        $someProject = $someProject[0];
+
+        $input = [
+            'user_id' => $this->user->id,
+            'title' => 'Other Project',
+            'Lorem ipsum dolor sit amet, nonumes voluptatum mel ea, cu case ceteros cum.',
+        ];
+
+        $this->repo->update($input, $someProject->id);
+
+        $this->assertDatabaseHas('projects', ['title' => $input['title'], 'id' => $someProject->id]);
     }
 }

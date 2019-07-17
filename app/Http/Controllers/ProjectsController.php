@@ -4,64 +4,49 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProject;
 use App\Mail\ProjectCreated;
-use App\Mail\ProjectDeleted;
-use App\Mail\ProjectEdited;
-use App\Queries\adminProjects;
-use Illuminate\Http\Request;
 use App\Projects;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use App\Repositories\ProjectRepository;
 
 class ProjectsController extends Controller
 {
-    public function __construct()
+
+    protected $projectRepository;
+
+    public function __construct(ProjectRepository $projectRepository)
     {
-        $this->middleware('auth')->only('store', 'update','destroy');
+        $this->projectRepository = $projectRepository;
+
+        $this->middleware('auth')->only('store', 'update', 'destroy');
     }
 
-    public function index(ProjectRepository $projectRepository)
+    public function index()
     {
+        if (Cache::has('projects')) {
+            $projects = Cache::get('projects');
 
+        } else {
+            $projects = $this->projectRepository->orderedProjects();
 
-//        $projects = Projects::where('user_id', auth()->id())->get();
-//        $projects = Projects::all();
-//
-//        Cache::add('projects' , $projects);
-
-        if(Cache::has('projects'))
-        {
-//            Log::info('from Cache');
-               $projects =  Cache::get('projects');
+            Cache::add('projects', $projects, 0);
         }
-        else
-        {
-//            Log::info('from DB');
-//            $projects = Projects::all(); //Global scope has been applied here
-//            $projects = $projectRepository->adminProjects(); //Using repository to implement query scopes
-            $projects = (new adminProjects())->get(); //Using query objects
-            Cache::add('projects' , $projects, 0);
-        }
-
 
         return view('Projects.index', compact('projects'));
     }
-
 
     public function create()
     {
         return view('Projects.create');
     }
 
-
     public function store(StoreProject $request)
     {
-
         $input = $request->all();
+
         $input['user_id'] = auth()->id();
 
-        $project = Projects::create($input);
+        $project = $this->projectRepository->save($input);
 
         Mail::to('kuttohisaac@gmail.com')->queue(
             new ProjectCreated($project)
@@ -70,46 +55,26 @@ class ProjectsController extends Controller
         return redirect('/projects');
     }
 
-
     public function details(Projects $project)
     {
         return view('Projects.details', compact('project'));
     }
 
-
     public function edit(Projects $project)
     {
         return view('Projects.edit', compact('project'));
-
     }
-
 
     public function update(StoreProject $request, $id)
     {
-
-        $project = Projects::findOrFail($id);
-
-        $project->update($request->all());
-
-//        Mail::to('kuttohisaac@gmail.com')->queue(
-//            new ProjectEdited($project)
-//        );
+        $this->projectRepository->update($request->all(), $id);
 
         return redirect('projects');
-
     }
-
 
     public function destroy($id)
     {
-
-        $project = Projects::findOrFail($id);
-
-//        Mail::to('kuttohisaac@gmail.com')->queue(
-//            new ProjectDeleted($project)
-//        );
-
-        $project->delete();
+        $this->projectRepository->delete($id);
 
         return redirect('/projects');
     }

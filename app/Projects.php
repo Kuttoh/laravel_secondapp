@@ -6,27 +6,15 @@ use Illuminate\Database\Eloquent\Model;
 
 class Projects extends Model
 {
-    protected $table="projects";
+    protected $table = "projects";
 
-    protected $guarded=['id'];
+    protected $guarded = ['id'];
 
     public function tasks()
     {
-       return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class);
     }
 
-//    protected static function boot()
-//    {
-//        parent::boot();
-//
-//        static::addGlobalScope('user_id', function ($builder) {
-//            $builder->where('user_id', '=', 1)
-//                    ->orderBy('title', 'asc');
-////                    ->where('id', '<', 10)
-//        });
-//    }
-
-    //Mutators
     public function setDescriptionAttribute($value)
     {
         $this->attributes['description'] = strtolower($value);

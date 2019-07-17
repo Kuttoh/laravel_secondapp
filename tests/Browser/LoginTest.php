@@ -18,7 +18,7 @@ class LoginTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/login')
-                    ->assertSee('Forgot Your Password?');
+                ->assertSee('Forgot Your Password?');
         });
     }
 
@@ -35,8 +35,7 @@ class LoginTest extends DuskTestCase
     {
         $user = factory(User::class)->make();
 
-        $this->browse(function ($browser) use ($user)
-        {
+        $this->browse(function ($browser) use ($user) {
             $browser->visit('/login')
                 ->type('email', $user->email)
                 ->type('password', $user->password)
@@ -48,9 +47,7 @@ class LoginTest extends DuskTestCase
 
     public function testUserInDatabaseCanLogIn()
     {
-
-        $this->browse(function ($browser)
-        {
+        $this->browse(function ($browser) {
             $browser->visit('/login')
                 ->type('email', 'kuttohisaac@gmail.com')
                 ->type('password', '13iS6ylWmhP1')
