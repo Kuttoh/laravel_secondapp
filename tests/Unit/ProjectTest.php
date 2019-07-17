@@ -59,9 +59,7 @@ class ProjectTest extends TestCase
 
     public function testItCanGetProjectById()
     {
-        $newProject = factory(Projects::class, 1)->create(['user_id' => $this->user->id]);
-
-        $newProject = $newProject[0];
+        $newProject = factory(Projects::class)->create(['user_id' => $this->user->id]);
 
         $project = $this->repo->getProjectById($newProject->id);
 
@@ -70,9 +68,7 @@ class ProjectTest extends TestCase
 
     public function testItCanUpdateProject()
     {
-        $someProject = factory(Projects::class, 1)->create(['user_id' => $this->user->id]);
-
-        $someProject = $someProject[0];
+        $newProject = factory(Projects::class)->create(['user_id' => $this->user->id]);
 
         $input = [
             'user_id' => $this->user->id,
@@ -80,8 +76,17 @@ class ProjectTest extends TestCase
             'Lorem ipsum dolor sit amet, nonumes voluptatum mel ea, cu case ceteros cum.',
         ];
 
-        $this->repo->update($input, $someProject->id);
+        $this->repo->update($input, $newProject->id);
 
-        $this->assertDatabaseHas('projects', ['title' => $input['title'], 'id' => $someProject->id]);
+        $this->assertDatabaseHas('projects', ['title' => $input['title'], 'id' => $newProject->id]);
+    }
+
+    public function testItCanDeleteProject()
+    {
+        $newProject = factory(Projects::class)->create(['user_id' => $this->user->id]);
+
+        $this->repo->delete($newProject->id);
+
+        $this->assertDatabaseMissing('projects', ['id' => $newProject->id]);
     }
 }
